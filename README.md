@@ -36,4 +36,4 @@ This is a Java-based console application that helps users manage daily tasks eff
 
 ## 👨‍💻 Author
 
-Your Name
+Kartikay Singh
