@@ -31,7 +31,13 @@ public class Main {
                 System.out.print("Enter Description: ");
                 String desc = sc.nextLine();
 
-                taskList.add(new Task(id, title, desc, "Pending"));
+                System.out.print("Enter Priority (Low/Medium/High): ");
+                String priority = sc.nextLine();
+
+                System.out.print("Enter Deadline (YYYY-MM-DD): ");
+                String deadline = sc.nextLine();
+
+                taskList.add(new Task(id, title, desc, "Pending", priority, deadline));
                 FileHandler.saveTasks(taskList);
                 System.out.println("✅ Task Added!");
 

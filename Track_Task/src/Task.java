@@ -4,13 +4,17 @@ public class Task {
     private String title;
     private String description;
     private String status; // Pending / Completed
+    private String priority;   // Low / Medium / High
+    private String deadline;   // simple string (e.g. 2026-04-10)
 
     // Constructor
-    public Task(int id, String title, String description, String status) {
+    public Task(int id, String title, String description, String status, String priority, String deadline) {
         this.id = id;
         this.title = title;
         this.description = description;
         this.status = status;
+        this.priority = priority;
+        this.deadline = deadline;
     }
 
     // Getters
@@ -36,15 +40,26 @@ public class Task {
     }
 
     // toString method (VERY important for printing)
+
     @Override
     public String toString() {
         return "ID: " + id +
                 " | Title: " + title +
-                " | Description: " + description +
-                " | Status: " + status;
+                " | Desc: " + description +
+                " | Status: " + status +
+                " | Priority: " + priority +
+                " | Deadline: " + deadline;
     }
 
     public String toFileString() {
-        return id + "," + title + "," + description + "," + status;
+        return id + "," + title + "," + description + "," + status + "," + priority + "," + deadline;
+    }
+
+    public String getPriority() {
+        return priority;
+    }
+
+    public String getDeadline() {
+        return deadline;
     }
 }
