@@ -14,7 +14,10 @@ public class Main {
             System.out.println("2. View Tasks");
             System.out.println("3. Mark Task as Completed");
             System.out.println("4. Delete Task");
-            System.out.println("5. Exit");
+            System.out.println("6. Sort by Priority");
+            System.out.println("7. Show Pending Tasks");
+            System.out.println("8. Show Completed Tasks");
+            System.out.println("9. Exit");
 
             System.out.print("Enter choice: ");
             int choice = sc.nextInt();
@@ -87,8 +90,33 @@ public class Main {
                     System.out.println("❌ Task not found.");
                 }
             }
+            else if (choice == 6) {
 
-            else if (choice == 5) {
+                taskList.sort((t1, t2) -> {
+                    return getPriorityValue(t1.getPriority()) - getPriorityValue(t2.getPriority());
+                });
+
+                System.out.println("📊 Tasks sorted by priority!");
+            }
+
+            else if (choice == 7) {
+
+                for (Task t : taskList) {
+                    if (t.getStatus().equalsIgnoreCase("Pending")) {
+                        System.out.println(t);
+                    }
+                }
+            }
+
+            else if (choice == 8) {
+
+                for (Task t : taskList) {
+                    if (t.getStatus().equalsIgnoreCase("Completed")) {
+                        System.out.println(t);
+                    }
+                }
+            }
+            else if (choice == 9) {
                 System.out.println("Exiting...");
                 break;
             }
@@ -98,6 +126,19 @@ public class Main {
             }
         }
 
+
+
         sc.close();
+
+
+    }
+
+    public static int getPriorityValue(String priority) {
+        switch (priority.toLowerCase()) {
+            case "high": return 1;
+            case "medium": return 2;
+            case "low": return 3;
+            default: return 4;
+        }
     }
 }
