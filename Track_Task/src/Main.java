@@ -12,11 +12,13 @@ public class Main {
             System.out.println("\n===== TASK MANAGER =====");
             System.out.println("1. Add Task");
             System.out.println("2. View Tasks");
-            System.out.println("3. Exit");
+            System.out.println("3. Mark Task as Completed");
+            System.out.println("4. Delete Task");
+            System.out.println("5. Exit");
 
             System.out.print("Enter choice: ");
             int choice = sc.nextInt();
-            sc.nextLine(); // clear buffer
+            sc.nextLine();
 
             if (choice == 1) {
                 System.out.print("Enter ID: ");
@@ -29,13 +31,12 @@ public class Main {
                 System.out.print("Enter Description: ");
                 String desc = sc.nextLine();
 
-                Task t = new Task(id, title, desc, "Pending");
-                taskList.add(t);
-
+                taskList.add(new Task(id, title, desc, "Pending"));
                 System.out.println("✅ Task Added!");
 
-            } else if (choice == 2) {
+            }
 
+            else if (choice == 2) {
                 if (taskList.isEmpty()) {
                     System.out.println("⚠ No tasks available.");
                 } else {
@@ -43,11 +44,47 @@ public class Main {
                         System.out.println(t);
                     }
                 }
+            }
 
-            } else if (choice == 3) {
+            else if (choice == 3) {
+                System.out.print("Enter Task ID to mark complete: ");
+                int id = sc.nextInt();
+
+                boolean found = false;
+
+                for (Task t : taskList) {
+                    if (t.getId() == id) {
+                        t.setStatus("Completed");
+                        found = true;
+                        System.out.println("✅ Task marked as completed!");
+                        break;
+                    }
+                }
+
+                if (!found) {
+                    System.out.println("❌ Task not found.");
+                }
+            }
+
+            else if (choice == 4) {
+                System.out.print("Enter Task ID to delete: ");
+                int id = sc.nextInt();
+
+                boolean removed = taskList.removeIf(t -> t.getId() == id);
+
+                if (removed) {
+                    System.out.println("🗑 Task deleted!");
+                } else {
+                    System.out.println("❌ Task not found.");
+                }
+            }
+
+            else if (choice == 5) {
                 System.out.println("Exiting...");
                 break;
-            } else {
+            }
+
+            else {
                 System.out.println("Invalid choice!");
             }
         }
