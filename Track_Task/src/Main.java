@@ -6,7 +6,7 @@ public class Main {
     public static void main(String[] args) {
 
         Scanner sc = new Scanner(System.in);
-        ArrayList<Task> taskList = new ArrayList<>();
+        ArrayList<Task> taskList = new ArrayList<>(FileHandler.loadTasks());
 
         while (true) {
             System.out.println("\n===== TASK MANAGER =====");
@@ -32,6 +32,7 @@ public class Main {
                 String desc = sc.nextLine();
 
                 taskList.add(new Task(id, title, desc, "Pending"));
+                FileHandler.saveTasks(taskList);
                 System.out.println("✅ Task Added!");
 
             }
@@ -55,6 +56,7 @@ public class Main {
                 for (Task t : taskList) {
                     if (t.getId() == id) {
                         t.setStatus("Completed");
+                        FileHandler.saveTasks(taskList);
                         found = true;
                         System.out.println("✅ Task marked as completed!");
                         break;
@@ -73,6 +75,7 @@ public class Main {
                 boolean removed = taskList.removeIf(t -> t.getId() == id);
 
                 if (removed) {
+                    FileHandler.saveTasks(taskList);
                     System.out.println("🗑 Task deleted!");
                 } else {
                     System.out.println("❌ Task not found.");

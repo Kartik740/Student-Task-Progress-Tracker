@@ -43,4 +43,8 @@ public class Task {
                 " | Description: " + description +
                 " | Status: " + status;
     }
+
+    public String toFileString() {
+        return id + "," + title + "," + description + "," + status;
+    }
 }
